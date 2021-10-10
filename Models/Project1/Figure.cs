@@ -1,10 +1,18 @@
 ﻿using GrafikaKomputerowa.Models;
+using GrafikaKomputerowa.Models.Project1;
+using System.Windows;
 using System.Windows.Media;
 
 namespace GrafikaKomputerowa.Project1.Models
 {
     public class Figure : NotifyPropertyChanged
     {
+        #region Constants
+        public static readonly double X_TOLLERACNE = 10;
+        public static readonly double Y_TOLLERACNE = 10;
+        #endregion
+
+        #region Properties
         private double _x;
         public double X
         {
@@ -91,6 +99,17 @@ namespace GrafikaKomputerowa.Project1.Models
                 _strokeThickness = value;
                 OnPropertyChanged();
             }
+        }
+        #endregion
+
+        public virtual MouseMoveMode GetMouseMoveMode(Point startPoint)
+        {
+            return MouseMoveMode.DRAG;
+        }
+
+        public virtual void MouseMove(Point startPoint, Point currentPoint, MouseMoveMode mouseMoveMode)
+        {
+
         }
     }
 }

@@ -71,6 +71,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Project1\MouseMoveMode.cs" />
     <Compile Include="Views\Project1View.xaml.cs">
       <DependentUpon>Project1View.xaml</DependentUpon>
     </Compile>

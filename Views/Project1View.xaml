@@ -10,7 +10,7 @@
              xmlns:converters="clr-namespace:GrafikaKomputerowa.Converters"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:GrafikaKomputerowa.Views"
-             mc:Ignorable="d">
+             mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.DataContext>
         <vm:Project1ViewModel/>
     </UserControl.DataContext>
@@ -33,7 +33,7 @@
             </StackPanel.Resources>
 
             <GroupBox Header="Figura" Margin="15 15 15 5">
-                <WrapPanel HorizontalAlignment="Center">
+                <WrapPanel HorizontalAlignment="Center" IsEnabled="{Binding IsFigureTypeChangeEnabled}">
                     <WrapPanel.Resources>
                         <Style TargetType="ToggleButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
                             <Setter Property="Margin" Value="4 0"/>
@@ -68,11 +68,11 @@
 
             <StackPanel Visibility="{Binding LineParametersVisibility}">
                 <GroupBox Header="Punkt początkowy - X">
-                    <mah:NumericUpDown Minimum="0" Value="{Binding CurrentFigure.X}"/>
+                    <mah:NumericUpDown Minimum="0" Value="{Binding CurrentLine.X1}"/>
                 </GroupBox>
 
                 <GroupBox Header="Punkt początkowy - Y">
-                    <mah:NumericUpDown Minimum="0" Value="{Binding CurrentFigure.Y}"/>
+                    <mah:NumericUpDown Minimum="0" Value="{Binding CurrentLine.Y1}"/>
                 </GroupBox>
 
                 <GroupBox Header="Punkt końcowy - X">
@@ -104,11 +104,11 @@
 
             <StackPanel Visibility="{Binding CircleParametersVisibility}">
                 <GroupBox Header="Punkt środkowy - X">
-                    <mah:NumericUpDown Minimum="0" Value="{Binding CurrentFigure.X}"/>
+                    <mah:NumericUpDown Minimum="0" Value="{Binding CurrentCircle.CenterPointX}"/>
                 </GroupBox>
 
                 <GroupBox Header="Punkt środkowy - Y">
-                    <mah:NumericUpDown Minimum="0" Value="{Binding CurrentFigure.Y}"/>
+                    <mah:NumericUpDown Minimum="0" Value="{Binding CurrentCircle.CenterPointY}"/>
                 </GroupBox>
 
                 <GroupBox Header="Promień">
@@ -116,7 +116,7 @@
                 </GroupBox>
             </StackPanel>
 
-            <Button Margin="15 5" Background="ForestGreen" ToolTip="Dodaj figurę" Command="{Binding AddFigureCommand}">
+            <Button Margin="15 5" Background="ForestGreen" ToolTip="Dodaj figurę" Command="{Binding AddFigureCommand}" Visibility="{Binding AddFigureButtonVisibility}">
                 <WrapPanel HorizontalAlignment="Center">
                     <fa:ImageAwesome Icon="Plus" Height="20" Foreground="White"/>
                 </WrapPanel>
@@ -130,8 +130,17 @@
                         <ItemsPanelTemplate>
                             <Canvas Background="Transparent">
                                 <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding CanvasPreviewMouseLeftButtonDownCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}}"/>
+                                    </i:EventTrigger>
                                     <i:EventTrigger EventName="MouseLeftButtonDown">
-                                        <i:InvokeCommandAction Command="{Binding CanvasMouseLeftButtonDownCommand}" PassEventArgsToCommand="True" CommandParameter="1"/>
+                                        <i:InvokeCommandAction Command="{Binding CanvasMouseLeftButtonDownCommand}" PassEventArgsToCommand="True"/>
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="MouseMove">
+                                        <i:InvokeCommandAction Command="{Binding CanvasMouseMoveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}}"/>
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding CanvasMouseLeftButtonUpCommand}"/>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </Canvas>
@@ -145,7 +154,7 @@
                     </ItemsControl.ItemContainerStyle>
                     <ItemsControl.Resources>
                         <DataTemplate DataType="{x:Type pr1:Line}">
-                            <Line X1="{Binding X}" Y1="{Binding Y}" X2="{Binding X2}" Y2="{Binding Y2}" StrokeThickness="{Binding StrokeThickness}" Stroke="{Binding StrokeColorBrush}"/>
+                            <Line X1="{Binding X1}" Y1="{Binding Y1}" X2="{Binding X2}" Y2="{Binding Y2}" StrokeThickness="{Binding StrokeThickness}" Stroke="{Binding StrokeColorBrush}"/>
                         </DataTemplate>
                         <DataTemplate DataType="{x:Type pr1:Rectangle}">
                             <Rectangle Width="{Binding Width}" Height="{Binding Height}" StrokeThickness="{Binding StrokeThickness}" Stroke="{Binding StrokeColorBrush}" Fill="{Binding FillColorBrush}"/>

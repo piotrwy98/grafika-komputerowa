@@ -5,16 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:vm="clr-namespace:GrafikaKomputerowa.ViewModels"
              xmlns:pr1="clr-namespace:GrafikaKomputerowa.Models.Project1"
              xmlns:converters="clr-namespace:GrafikaKomputerowa.Converters"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:GrafikaKomputerowa.Views"
              mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="800">
-    <UserControl.DataContext>
-        <vm:Project1ViewModel/>
-    </UserControl.DataContext>
-    
     <UserControl.Resources>
         <converters:DoubleUpValueConverter x:Key="DoubleUpValueConverter"/>
     </UserControl.Resources>

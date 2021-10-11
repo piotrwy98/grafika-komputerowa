@@ -1,12 +1,15 @@
 ﻿using GrafikaKomputerowa.Models;
 using GrafikaKomputerowa.Models.Project1;
 using GrafikaKomputerowa.Project1.Models;
-using System;
+using Microsoft.Win32;
+using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
+using System.Xml;
 
 namespace GrafikaKomputerowa.ViewModels
 {
@@ -21,7 +24,19 @@ namespace GrafikaKomputerowa.ViewModels
         #endregion
 
         #region Properties
-        public ObservableCollection<Figure> Figures { get; set; }
+        private ObservableCollection<Figure> _figures;
+        public ObservableCollection<Figure> Figures
+        {
+            get
+            {
+                return _figures;
+            }
+            set
+            {
+                _figures = value;
+                OnPropertyChanged();
+            }
+        }
 
         private Figure _currentFigure;
         public Figure CurrentFigure
@@ -249,6 +264,64 @@ namespace GrafikaKomputerowa.ViewModels
 
             Figures = new ObservableCollection<Figure>();
             IsLineChecked = true;
+        }
+
+        public async void OpenFile()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Wybierz plik do odczytu";
+            openFileDialog.Filter = "JSON|*.json";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                var jsonSerializerSettings = new JsonSerializerSettings()
+                {
+                    TypeNameHandling = TypeNameHandling.Auto
+                };
+
+                try
+                {
+                    await Task.Run(() =>
+                    {
+                        string json = File.ReadAllText(openFileDialog.FileName);
+                        Figures = JsonConvert.DeserializeObject<ObservableCollection<Figure>>(json, jsonSerializerSettings);
+                    });
+                }
+                catch
+                {
+                    MessageBox.Show("Błąd wczytywania pliku JSON", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        public async void SaveFile()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "Wybierz plik do zapisu";
+            saveFileDialog.Filter = "JSON|*.json";
+            saveFileDialog.FileName = "figures";
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                var jsonSerializerSettings = new JsonSerializerSettings()
+                {
+                    TypeNameHandling = TypeNameHandling.Auto,
+                    Formatting = Newtonsoft.Json.Formatting.Indented
+                };
+
+                try
+                {
+                    await Task.Run(() =>
+                    {
+                        string json = JsonConvert.SerializeObject(Figures, jsonSerializerSettings);
+                        File.WriteAllText(saveFileDialog.FileName, json);
+                    });
+                }
+                catch
+                {
+                    MessageBox.Show("Błąd zapisu pliku JSON", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         private void AddFigure(object obj)

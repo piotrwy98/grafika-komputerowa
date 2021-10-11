@@ -5,22 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:vm="clr-namespace:GrafikaKomputerowa.ViewModels"
         xmlns:local="clr-namespace:GrafikaKomputerowa.Views"
         mc:Ignorable="d"
-        Title="Grafika komputerowa" TitleCharacterCasing="Normal" Height="725" Width="1000" FontSize="14" WindowStartupLocation="CenterScreen">
+        Title="Grafika komputerowa" TitleCharacterCasing="Normal" Height="750" Width="1000" FontSize="14" WindowStartupLocation="CenterScreen">
+    <mah:MetroWindow.DataContext>
+        <vm:MainView/>
+    </mah:MetroWindow.DataContext>
+    
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <TabControl Grid.Row="0" Margin="3 5 3 0" Padding="-3 0">
+        <Menu Grid.Row="0">
+            <MenuItem Header="Plik">
+                <MenuItem Header="Otwórz.." Command="{Binding OpenFileCommand}">
+                    <MenuItem.Icon>
+                        <fa:ImageAwesome Icon="FolderOpen" Height="18" Margin="3"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Zapisz.." Command="{Binding SaveFileCommand}">
+                    <MenuItem.Icon>
+                        <fa:ImageAwesome Icon="Save" Height="18" Margin="3"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Opisy projektów" Command="{Binding ProjectDescriptionsCommand}"/>
+        </Menu>
+
+        <TabControl Name="TabControl" Grid.Row="1" Margin="3 5 3 0" Padding="-3 0" SelectedIndex="{Binding TabControlSelectedIndex}">
             <TabItem Header="Projekt 1" Style="{x:Null}">
-                <local:Project1View/>
+                <local:Project1View DataContext="{Binding Project1VM}"/>
             </TabItem>
         </TabControl>
 
-        <StatusBar Grid.Row="1">
+        <StatusBar Grid.Row="2">
             <StatusBarItem>
                 <TextBlock Text=" "/>
             </StatusBarItem>

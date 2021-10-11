@@ -8,10 +8,6 @@
         xmlns:local="clr-namespace:GrafikaKomputerowa.Views"
         mc:Ignorable="d"
         Title="Opisy projektów" TitleCharacterCasing="Normal" MinHeight="200" Height="275" MinWidth="200" Width="600" WindowStartupLocation="CenterScreen">
-    <mah:MetroWindow.DataContext>
-        <vm:ProjectDescripionsViewModel/>
-    </mah:MetroWindow.DataContext>
-
     <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0 5">
         <StackPanel>
             <StackPanel.Resources>

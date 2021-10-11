@@ -6,13 +6,17 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:vm="clr-namespace:GrafikaKomputerowa.ViewModels"
+        xmlns:dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:GrafikaKomputerowa.Views"
         mc:Ignorable="d"
-        Title="Grafika komputerowa" TitleCharacterCasing="Normal" Height="750" Width="1000" FontSize="14" WindowStartupLocation="CenterScreen">
-    <mah:MetroWindow.DataContext>
-        <vm:MainView/>
-    </mah:MetroWindow.DataContext>
-    
+        Title="Grafika komputerowa" TitleCharacterCasing="Normal" Height="788" MinHeight="788" Width="1000" MinWidth="400" 
+        FontSize="14" WindowStartupLocation="CenterScreen" dialog:DialogParticipation.Register="{Binding}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="KeyDown">
+            <i:InvokeCommandAction Command="{Binding WindowKeyDownCommand}" PassEventArgsToCommand="True"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -22,6 +26,11 @@
 
         <Menu Grid.Row="0">
             <MenuItem Header="Plik">
+                <MenuItem Header="Nowy" Command="{Binding NewFileCommand}">
+                    <MenuItem.Icon>
+                        <fa:ImageAwesome Icon="File" Height="18" Margin="3"/>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <MenuItem Header="Otwórz.." Command="{Binding OpenFileCommand}">
                     <MenuItem.Icon>
                         <fa:ImageAwesome Icon="FolderOpen" Height="18" Margin="3"/>

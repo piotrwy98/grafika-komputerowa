@@ -1,4 +1,6 @@
-﻿using MahApps.Metro.Controls;
+﻿using GrafikaKomputerowa.ViewModels;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace GrafikaKomputerowa.Views
 {
@@ -10,6 +12,7 @@ namespace GrafikaKomputerowa.Views
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel(DialogCoordinator.Instance);
         }
     }
 }

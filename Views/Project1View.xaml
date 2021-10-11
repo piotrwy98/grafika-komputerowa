@@ -8,8 +8,9 @@
              xmlns:pr1="clr-namespace:GrafikaKomputerowa.Models.Project1"
              xmlns:converters="clr-namespace:GrafikaKomputerowa.Converters"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
              xmlns:local="clr-namespace:GrafikaKomputerowa.Views"
-             mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="800">
+             mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="800" dialog:DialogParticipation.Register="{Binding}">
     <UserControl.Resources>
         <converters:DoubleUpValueConverter x:Key="DoubleUpValueConverter"/>
     </UserControl.Resources>
@@ -27,7 +28,9 @@
                 </Style>
             </StackPanel.Resources>
 
-            <GroupBox Header="Figura" Margin="15 15 15 5">
+            <GroupBox Header="Pomoc" Height="26" Cursor="Help" Margin="15 15 15 5" ToolTipService.ShowDuration="10000" ToolTip="LPM - Zmiana pozycji, zmiana rozmiaru&#10;PPM - Rysowanie wybranej figury&#10;DEL - Usunięcie aktualnie wybranej figury"/>
+
+            <GroupBox Header="Figura">
                 <WrapPanel HorizontalAlignment="Center" IsEnabled="{Binding IsFigureTypeChangeEnabled}">
                     <WrapPanel.Resources>
                         <Style TargetType="ToggleButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
@@ -116,6 +119,12 @@
                     <fa:ImageAwesome Icon="Plus" Height="20" Foreground="White"/>
                 </WrapPanel>
             </Button>
+
+            <Button Margin="15 5" Background="Red" ToolTip="Usuń figurę" Command="{Binding RemoveFigureCommand}" Visibility="{Binding RemoveFigureButtonVisibility}">
+                <WrapPanel HorizontalAlignment="Center">
+                    <fa:ImageAwesome Icon="Times" Height="20" Foreground="White"/>
+                </WrapPanel>
+            </Button>
         </StackPanel>
 
         <Border Grid.Column="1" BorderBrush="LightGray" BorderThickness="0 15 12 15">
@@ -136,6 +145,9 @@
                                     </i:EventTrigger>
                                     <i:EventTrigger EventName="MouseLeftButtonUp">
                                         <i:InvokeCommandAction Command="{Binding CanvasMouseLeftButtonUpCommand}"/>
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="MouseRightButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding CanvasMouseRightButtonDownCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}}"/>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </Canvas>

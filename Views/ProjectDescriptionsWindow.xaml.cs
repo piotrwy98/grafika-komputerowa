@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using GrafikaKomputerowa.ViewModels;
+using MahApps.Metro.Controls;
 
 namespace GrafikaKomputerowa.Views
 {
@@ -10,6 +11,7 @@ namespace GrafikaKomputerowa.Views
         public ProjectDescriptionsWindow()
         {
             InitializeComponent();
+            DataContext = new ProjectDescripionsViewModel();
         }
     }
 }

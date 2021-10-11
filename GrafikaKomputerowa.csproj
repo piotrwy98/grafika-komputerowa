@@ -75,7 +75,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Project1\MouseMoveMode.cs" />
-    <Compile Include="ViewModels\MainView.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ProjectDescripionsViewModel.cs" />
     <Compile Include="Views\Project1View.xaml.cs">
       <DependentUpon>Project1View.xaml</DependentUpon>

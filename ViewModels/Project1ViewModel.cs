@@ -1,15 +1,17 @@
 ﻿using GrafikaKomputerowa.Models;
 using GrafikaKomputerowa.Models.Project1;
 using GrafikaKomputerowa.Project1.Models;
+using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
 using Newtonsoft.Json;
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Xml;
+using System.Windows.Media;
 
 namespace GrafikaKomputerowa.ViewModels
 {
@@ -17,10 +19,12 @@ namespace GrafikaKomputerowa.ViewModels
     {
         #region Commands
         public ICommand AddFigureCommand { get; set; }
+        public ICommand RemoveFigureCommand { get; set; }
         public ICommand CanvasPreviewMouseLeftButtonDownCommand { get; set; }
         public ICommand CanvasMouseLeftButtonDownCommand { get; set; }
         public ICommand CanvasMouseMoveCommand { get; set; }
         public ICommand CanvasMouseLeftButtonUpCommand { get; set; }
+        public ICommand CanvasMouseRightButtonDownCommand { get; set; }
         #endregion
 
         #region Properties
@@ -34,6 +38,9 @@ namespace GrafikaKomputerowa.ViewModels
             set
             {
                 _figures = value;
+                IsLineChecked = true;
+                CurrentLine = new Line();
+                IsFigureTypeChangeEnabled = true;
                 OnPropertyChanged();
             }
         }
@@ -233,6 +240,7 @@ namespace GrafikaKomputerowa.ViewModels
                 _isFigureTypeChangeEnabled = value;
                 OnPropertyChanged();
                 OnPropertyChanged("AddFigureButtonVisibility");
+                OnPropertyChanged("RemoveFigureButtonVisibility");
             }
         }
 
@@ -246,24 +254,49 @@ namespace GrafikaKomputerowa.ViewModels
                 return Visibility.Collapsed;
             }
         }
+
+        public Visibility RemoveFigureButtonVisibility
+        {
+            get
+            {
+                if (_isFigureTypeChangeEnabled)
+                    return Visibility.Collapsed;
+
+                return Visibility.Visible;
+            }
+        }
         #endregion
 
         #region Variables
         private Figure _draggedFigure;
         private Point _startPoint;
         private MouseMoveMode _mouseMoveMode;
+        private bool _isFirstPointDefined;
+        private Circle _firstPoint;
         #endregion
 
         public Project1ViewModel()
         {
             AddFigureCommand = new RelayCommand(AddFigure);
+            RemoveFigureCommand = new RelayCommand(RemoveFigure);
             CanvasPreviewMouseLeftButtonDownCommand = new RelayCommand(CanvasPreviewMouseLeftButtonDown);
             CanvasMouseLeftButtonDownCommand = new RelayCommand(CanvasMouseLeftButtonDown);
             CanvasMouseMoveCommand = new RelayCommand(CanvasMouseMove);
             CanvasMouseLeftButtonUpCommand = new RelayCommand(CanvasMouseLeftButtonUp);
+            CanvasMouseRightButtonDownCommand = new RelayCommand(CanvasMouseRightButtonDown);
 
             Figures = new ObservableCollection<Figure>();
-            IsLineChecked = true;
+            _firstPoint = new Circle
+            {
+                Radius = 10,
+                StrokeColor = Colors.LightSkyBlue,
+                FillColor = Colors.LightSkyBlue,
+            };
+        }
+
+        public void NewFile()
+        {
+            Figures = new ObservableCollection<Figure>();
         }
 
         public async void OpenFile()
@@ -334,6 +367,26 @@ namespace GrafikaKomputerowa.ViewModels
                 Figures.Add(CurrentCircle);
 
             IsFigureTypeChangeEnabled = false;
+        }
+
+        private async void RemoveFigure(object obj = null)
+        {
+            var metroDialogSettings = new MetroDialogSettings()
+            {
+                AffirmativeButtonText = "Tak",
+                NegativeButtonText = "Nie",
+                AnimateHide = false
+            };
+
+            var dialogCoordinator = (Application.Current.MainWindow.DataContext as MainViewModel).DialogCoordinator;
+            var result = await dialogCoordinator.ShowMessageAsync(this, "Uwaga", "Czy na pewno chcesz usunąć tę figurę?", MessageDialogStyle.AffirmativeAndNegative, metroDialogSettings);
+            if (result != MessageDialogResult.Affirmative)
+                return;
+
+            Figures.Remove(CurrentFigure);
+            IsLineChecked = true;
+            CurrentLine = new Line();
+            IsFigureTypeChangeEnabled = true;
         }
 
         private void CanvasPreviewMouseLeftButtonDown(object obj)
@@ -433,5 +486,105 @@ namespace GrafikaKomputerowa.ViewModels
             _draggedFigure = null;
             Mouse.OverrideCursor = Cursors.Arrow;
         }
+
+        private void CanvasMouseRightButtonDown(object obj)
+        {
+            Canvas canvas = obj as Canvas;
+            if (canvas != null)
+            {
+                Point currentPoint = Mouse.GetPosition(canvas);
+                currentPoint.X = Math.Floor(currentPoint.X);
+                currentPoint.Y = Math.Floor(currentPoint.Y);
+
+                if (!_isFirstPointDefined)
+                {
+                    _firstPoint.CenterPointX = currentPoint.X;
+                    _firstPoint.CenterPointY = currentPoint.Y;
+                    Figures.Add(_firstPoint);
+                    _isFirstPointDefined = true;
+                }
+                else
+                {
+                    if(IsLineChecked)
+                    {
+                        Line line = new Line()
+                        {
+                            X1 = _firstPoint.X,
+                            Y1 = _firstPoint.Y,
+                            X2 = currentPoint.X,
+                            Y2 = currentPoint.Y,
+                            StrokeThickness = CurrentLine.StrokeThickness,
+                            StrokeColor = CurrentLine.StrokeColor
+                        };
+
+                        Figures.Add(line);
+                        CurrentLine = line;
+                    }
+                    else if(IsRectangleChecked)
+                    {
+                        double width = currentPoint.X - _firstPoint.X;
+                        double x = _firstPoint.X;
+                        if (width < 0)
+                            x = currentPoint.X;
+
+                        double height = currentPoint.Y - _firstPoint.Y;
+                        double y = _firstPoint.Y;
+                        if (height < 0)
+                            y = currentPoint.Y;
+
+                        Rectangle rectangle = new Rectangle()
+                        {
+                            X = x,
+                            Y = y,
+                            Width = Math.Abs(width),
+                            Height = Math.Abs(height),
+                            StrokeThickness = CurrentLine.StrokeThickness,
+                            StrokeColor = CurrentLine.StrokeColor,
+                            FillColor = CurrentLine.FillColor
+                        };
+
+                        Figures.Add(rectangle);
+                        CurrentRectangle = rectangle;
+                    }
+                    else // IsCircleChecked
+                    {
+                        Circle circle = new Circle()
+                        {
+                            CenterPointX = _firstPoint.X,
+                            CenterPointY = _firstPoint.Y,
+                            Radius = Math.Floor(GetDistanceBetweenPoints(currentPoint)),
+                            StrokeThickness = CurrentLine.StrokeThickness,
+                            StrokeColor = CurrentLine.StrokeColor,
+                            FillColor = CurrentLine.FillColor
+                        };
+
+                        Figures.Add(circle);
+                        CurrentCircle = circle;
+                    }
+
+                    Figures.Remove(_firstPoint);
+                    _isFirstPointDefined = false;
+                    IsFigureTypeChangeEnabled = false;
+                }
+            }
+        }
+
+        private double GetDistanceBetweenPoints(Point currentPoint)
+        {
+            double distanceX = currentPoint.X - _firstPoint.X;
+            double distanceY = currentPoint.Y - _firstPoint.Y;
+            return Math.Sqrt(distanceX * distanceX + distanceY * distanceY);
+        }
+
+        public void KeyDown(KeyEventArgs args)
+        {
+            switch(args.Key)
+            {
+                case Key.Delete:
+                    if (CurrentFigure != null && Figures.Contains(CurrentFigure))
+                        RemoveFigure();
+                    break;
+            }
+    }
     }
 }

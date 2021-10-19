@@ -19,8 +19,8 @@ namespace GrafikaKomputerowa.ViewModels
         public IDialogCoordinator DialogCoordinator;
         public int TabControlSelectedIndex { get; set; }
         public Project1ViewModel Project1VM { get; set; }
+        public Project2ViewModel Project2VM { get; set; }
         #endregion
-
 
         public MainViewModel(IDialogCoordinator dialogCoordinator)
         {
@@ -33,6 +33,7 @@ namespace GrafikaKomputerowa.ViewModels
             WindowKeyDownCommand = new RelayCommand(WindowKeyDown);
 
             Project1VM = new Project1ViewModel();
+            Project2VM = new Project2ViewModel();
         }
 
         private async void NewFile(object obj)
@@ -63,6 +64,10 @@ namespace GrafikaKomputerowa.ViewModels
                 case 0:
                     Project1VM.OpenFile();
                     break;
+
+                case 1:
+                    Project2VM.OpenFile();
+                    break;
             }
         }
 
@@ -72,6 +77,10 @@ namespace GrafikaKomputerowa.ViewModels
             {
                 case 0:
                     Project1VM.SaveFile();
+                    break;
+
+                case 1:
+                    Project2VM.SaveFile();
                     break;
             }
         }

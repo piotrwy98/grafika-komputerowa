@@ -294,8 +294,20 @@ namespace GrafikaKomputerowa.ViewModels
             };
         }
 
-        public void NewFile()
+        public async void NewFile()
         {
+            var metroDialogSettings = new MetroDialogSettings()
+            {
+                AffirmativeButtonText = "Tak",
+                NegativeButtonText = "Nie",
+                AnimateHide = false
+            };
+
+            var dialogCoordinator = (Application.Current.MainWindow.DataContext as MainViewModel).DialogCoordinator;
+            var result = await dialogCoordinator.ShowMessageAsync(this, "Uwaga", "Niezapisane zmiany zostaną utracone. Kontynuować?", MessageDialogStyle.AffirmativeAndNegative, metroDialogSettings);
+            if (result != MessageDialogResult.Affirmative)
+                return;
+
             Figures = new ObservableCollection<Figure>();
         }
 

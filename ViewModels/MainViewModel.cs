@@ -20,6 +20,7 @@ namespace GrafikaKomputerowa.ViewModels
         public int TabControlSelectedIndex { get; set; }
         public Project1ViewModel Project1VM { get; set; }
         public Project2ViewModel Project2VM { get; set; }
+        public Project3ViewModel Project3VM { get; set; }
         #endregion
 
         public MainViewModel(IDialogCoordinator dialogCoordinator)
@@ -34,21 +35,11 @@ namespace GrafikaKomputerowa.ViewModels
 
             Project1VM = new Project1ViewModel();
             Project2VM = new Project2ViewModel();
+            Project3VM = new Project3ViewModel();
         }
 
-        private async void NewFile(object obj)
+        private void NewFile(object obj)
         {
-            var metroDialogSettings = new MetroDialogSettings()
-            {
-                AffirmativeButtonText = "Tak",
-                NegativeButtonText = "Nie",
-                AnimateHide = false
-            };
-
-            var result = await DialogCoordinator.ShowMessageAsync(this, "Uwaga", "Niezapisane zmiany zostaną utracone. Kontynuować?", MessageDialogStyle.AffirmativeAndNegative, metroDialogSettings);
-            if (result != MessageDialogResult.Affirmative)
-                return;
-
             switch (TabControlSelectedIndex)
             {
                 case 0:

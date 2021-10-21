@@ -76,6 +76,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\CompressionLevelConverter.cs" />
+    <Compile Include="Converters\MultiplyByOneHundred.cs" />
     <Compile Include="Models\DialogCloser.cs" />
     <Compile Include="Models\Project1\MouseMoveMode.cs" />
     <Compile Include="Models\Project2\InvalidPpmFileException.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="ViewModels\CompressionLevelViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\Project2ViewModel.cs" />
+    <Compile Include="ViewModels\Project3ViewModel.cs" />
     <Compile Include="ViewModels\ProjectDescripionsViewModel.cs" />
     <Compile Include="Views\CompressionLevelWindow.xaml.cs">
       <DependentUpon>CompressionLevelWindow.xaml</DependentUpon>
@@ -92,6 +94,9 @@
     </Compile>
     <Compile Include="Views\Project2View.xaml.cs">
       <DependentUpon>Project2View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project3View.xaml.cs">
+      <DependentUpon>Project3View.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProjectDescriptionsWindow.xaml.cs">
       <DependentUpon>ProjectDescriptionsWindow.xaml</DependentUpon>
@@ -125,6 +130,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Project2View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project3View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

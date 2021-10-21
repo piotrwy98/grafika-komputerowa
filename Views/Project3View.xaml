@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="GrafikaKomputerowa.Views.Project3View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:converters="clr-namespace:GrafikaKomputerowa.Converters"
+             xmlns:local="clr-namespace:GrafikaKomputerowa.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:MultiplyByOneHundredConverter x:Key="MultiplyByOneHundredConverter"/>
+    </UserControl.Resources>
+    
+    <WrapPanel Margin="10">
+        <StackPanel>
+            <Border Width="150" Height="150" Background="{Binding SelectedColorBrush}" BorderThickness="1" BorderBrush="Black"/>
+            <mah:ColorPicker SelectedColor="{Binding SelectedColor}" Margin="0 10 0 0" Width="150"/>
+        </StackPanel>
+
+        <StackPanel Width="200">
+            <StackPanel.Resources>
+                <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+            </StackPanel.Resources>
+            
+            <GroupBox Header="Red">
+                <mah:NumericUpDown Value="{Binding R}" Minimum="0" Maximum="255"/>
+            </GroupBox>
+
+            <GroupBox Header="Green">
+                <mah:NumericUpDown Value="{Binding G}" Minimum="0" Maximum="255"/>
+            </GroupBox>
+
+            <GroupBox Header="Blue">
+                <mah:NumericUpDown Value="{Binding B}" Minimum="0" Maximum="255"/>
+            </GroupBox>
+        </StackPanel>
+
+        <StackPanel Width="200">
+            <StackPanel.Resources>
+                <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <GroupBox Header="Cyan">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                <mah:NumericUpDown Grid.Column="0" Value="{Binding C, Converter={StaticResource MultiplyByOneHundredConverter}}" Minimum="0" Maximum="100"/>
+                    <Label Grid.Column="1" Content="%" Margin="2 0 -2 0"/>
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Header="Magenta">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                <mah:NumericUpDown Grid.Column="0" Value="{Binding M, Converter={StaticResource MultiplyByOneHundredConverter}}" Minimum="0" Maximum="100"/>
+                    <Label Grid.Column="1" Content="%" Margin="2 0 -2 0"/>
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Header="Yellow">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                <mah:NumericUpDown Grid.Column="0" Value="{Binding Y, Converter={StaticResource MultiplyByOneHundredConverter}}" Minimum="0" Maximum="100"/>
+                    <Label Grid.Column="1" Content="%" Margin="2 0 -2 0"/>
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Header="Black">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                <mah:NumericUpDown Grid.Column="0" Value="{Binding K, Converter={StaticResource MultiplyByOneHundredConverter}}" Minimum="0" Maximum="100"/>
+                    <Label Grid.Column="1" Content="%" Margin="2 0 -2 0"/>
+                </Grid>
+            </GroupBox>
+        </StackPanel>
+    </WrapPanel>
+</UserControl>

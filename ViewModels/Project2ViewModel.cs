@@ -1,7 +1,6 @@
 ﻿using GrafikaKomputerowa.Models;
 using GrafikaKomputerowa.Models.Project2;
 using GrafikaKomputerowa.Views;
-using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
 using System;
 using System.Drawing;

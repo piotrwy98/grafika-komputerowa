@@ -5,27 +5,32 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:converters="clr-namespace:GrafikaKomputerowa.Converters"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:local="clr-namespace:GrafikaKomputerowa.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <converters:MultiplyByOneHundredConverter x:Key="MultiplyByOneHundredConverter"/>
     </UserControl.Resources>
-    
-    <WrapPanel Margin="10">
-        <StackPanel>
-            <Border Width="150" Height="150" Background="{Binding SelectedColorBrush}" BorderThickness="1" BorderBrush="Black"/>
-            <mah:ColorPicker SelectedColor="{Binding SelectedColor}" Margin="0 10 0 0" Width="150"/>
-        </StackPanel>
 
-        <StackPanel Width="200">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Background="LightGray">
             <StackPanel.Resources>
                 <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
                     <Setter Property="Margin" Value="5"/>
                 </Style>
             </StackPanel.Resources>
+
+            <GroupBox Header="Kolor" Margin="5 15 5 5">
+                <mah:ColorPicker SelectedColor="{Binding SelectedColor}"/>
+            </GroupBox>
             
-            <GroupBox Header="Red">
+            <GroupBox Header="Red" Margin="5 42 5 5">
                 <mah:NumericUpDown Value="{Binding R}" Minimum="0" Maximum="255"/>
             </GroupBox>
 
@@ -36,23 +41,15 @@
             <GroupBox Header="Blue">
                 <mah:NumericUpDown Value="{Binding B}" Minimum="0" Maximum="255"/>
             </GroupBox>
-        </StackPanel>
 
-        <StackPanel Width="200">
-            <StackPanel.Resources>
-                <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
-                    <Setter Property="Margin" Value="5"/>
-                </Style>
-            </StackPanel.Resources>
-
-            <GroupBox Header="Cyan">
+            <GroupBox Header="Cyan" Margin="5 42 5 5">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
 
-                <mah:NumericUpDown Grid.Column="0" Value="{Binding C, Converter={StaticResource MultiplyByOneHundredConverter}}" Minimum="0" Maximum="100"/>
+                    <mah:NumericUpDown Grid.Column="0" Value="{Binding C, Converter={StaticResource MultiplyByOneHundredConverter}}" Minimum="0" Maximum="100"/>
                     <Label Grid.Column="1" Content="%" Margin="2 0 -2 0"/>
                 </Grid>
             </GroupBox>
@@ -64,7 +61,7 @@
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
 
-                <mah:NumericUpDown Grid.Column="0" Value="{Binding M, Converter={StaticResource MultiplyByOneHundredConverter}}" Minimum="0" Maximum="100"/>
+                    <mah:NumericUpDown Grid.Column="0" Value="{Binding M, Converter={StaticResource MultiplyByOneHundredConverter}}" Minimum="0" Maximum="100"/>
                     <Label Grid.Column="1" Content="%" Margin="2 0 -2 0"/>
                 </Grid>
             </GroupBox>
@@ -76,7 +73,7 @@
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
 
-                <mah:NumericUpDown Grid.Column="0" Value="{Binding Y, Converter={StaticResource MultiplyByOneHundredConverter}}" Minimum="0" Maximum="100"/>
+                    <mah:NumericUpDown Grid.Column="0" Value="{Binding Y, Converter={StaticResource MultiplyByOneHundredConverter}}" Minimum="0" Maximum="100"/>
                     <Label Grid.Column="1" Content="%" Margin="2 0 -2 0"/>
                 </Grid>
             </GroupBox>
@@ -88,10 +85,91 @@
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
 
-                <mah:NumericUpDown Grid.Column="0" Value="{Binding K, Converter={StaticResource MultiplyByOneHundredConverter}}" Minimum="0" Maximum="100"/>
+                    <mah:NumericUpDown Grid.Column="0" Value="{Binding K, Converter={StaticResource MultiplyByOneHundredConverter}}" Minimum="0" Maximum="100"/>
                     <Label Grid.Column="1" Content="%" Margin="2 0 -2 0"/>
                 </Grid>
             </GroupBox>
         </StackPanel>
-    </WrapPanel>
+
+        <Border Grid.Column="1" BorderBrush="LightGray" BorderThickness="0 15 12 15">
+            <Grid>
+                <Viewport3D>
+                    <Viewport3D.Camera>
+                        <PerspectiveCamera Position="6 5 4" LookDirection="-6 -5 -4"/>
+                    </Viewport3D.Camera>
+                    <ModelVisual3D>
+                        <ModelVisual3D.Content>
+                            <DirectionalLight Direction="-1 -1 -1"/>
+                        </ModelVisual3D.Content>
+                    </ModelVisual3D>
+                    <ModelVisual3D>
+                        <ModelVisual3D.Content>
+                            <GeometryModel3D>
+                                <GeometryModel3D.Geometry>
+                                    <MeshGeometry3D
+                                        Positions="0 0 0  1 0 0  0 1 0  1 1 0  0 0 1  1 0 1  0 1 1  1 1 1"
+                                        TriangleIndices="2 3 1  2 1 0  7 1 3  7 5 1  6 5 7  6 4 5  6 2 0  6 0 4  2 7 3  2 6 7  0 1 5  0 5 4">
+                                    </MeshGeometry3D>
+                                </GeometryModel3D.Geometry>
+                                <GeometryModel3D.Material>
+                                    <DiffuseMaterial>
+                                        <DiffuseMaterial.Brush>
+                                            <SolidColorBrush Color="{Binding SelectedColor}"/>
+                                        </DiffuseMaterial.Brush>
+                                    </DiffuseMaterial>
+                                </GeometryModel3D.Material>
+                            </GeometryModel3D>
+                        </ModelVisual3D.Content>
+                        <ModelVisual3D.Transform>
+                            <Transform3DGroup>
+                                <RotateTransform3D CenterX="0.5" CenterY="0.5" CenterZ="0.5">
+                                    <RotateTransform3D.Rotation>
+                                        <AxisAngleRotation3D Axis="0 0.5 0" Angle="{Binding AngleX}"/>
+                                    </RotateTransform3D.Rotation>
+                                </RotateTransform3D>
+                                <RotateTransform3D CenterX="0.5" CenterY="0.5" CenterZ="0.5">
+                                    <RotateTransform3D.Rotation>
+                                        <AxisAngleRotation3D Axis="0.5 0 0" Angle="{Binding AngleY}"/>
+                                    </RotateTransform3D.Rotation>
+                                </RotateTransform3D>
+                            </Transform3DGroup>
+                        </ModelVisual3D.Transform>
+                    </ModelVisual3D>
+                </Viewport3D>
+
+                <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.Resources>
+                        <Style TargetType="RepeatButton" BasedOn="{StaticResource {x:Type RepeatButton}}">
+                            <Setter Property="Width" Value="50"/>
+                            <Setter Property="Height" Value="50"/>
+                            <Setter Property="Margin" Value="2"/>
+                        </Style>
+                    </Grid.Resources>
+
+                    <RepeatButton Grid.Row="0" Grid.Column="1" Command="{Binding ChangeYAngleCommand}" CommandParameter="-10">
+                        <fa:ImageAwesome Icon="ArrowUp" Foreground="DarkRed"/>
+                    </RepeatButton>
+                    <RepeatButton Grid.Row="1" Grid.Column="0" Command="{Binding ChangeXAngleCommand}" CommandParameter="-10">
+                        <fa:ImageAwesome Icon="ArrowLeft" Foreground="DarkRed"/>
+                    </RepeatButton>
+                    <RepeatButton Grid.Row="1" Grid.Column="2" Command="{Binding ChangeXAngleCommand}" CommandParameter="10">
+                        <fa:ImageAwesome Icon="ArrowRight" Foreground="DarkRed"/>
+                    </RepeatButton>
+                    <RepeatButton Grid.Row="2" Grid.Column="1" Command="{Binding ChangeYAngleCommand}" CommandParameter="10">
+                        <fa:ImageAwesome Icon="ArrowDown" Foreground="DarkRed"/>
+                    </RepeatButton>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
 </UserControl>

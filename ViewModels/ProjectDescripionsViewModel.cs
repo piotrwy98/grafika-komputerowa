@@ -20,5 +20,15 @@
             "\u2022 Możliwość wyboru stopnia kompresji przy zapisie do JPEG,\n" +
             "\u2022 Skalowanie liniowe kolorów,\n" +
             "\u2022 Proszę nie używać gotowych bibliotek do wczytywania plików PPM.";
+
+        public string Project3Description { get; } = "a. Konwersja przestrzeni barw:\n" +
+            "  \u2022 Dwie możliwości wyboru koloru przez użytkownika: RGB orac CMYK (narzędzia do wyboru koloru mogą być wzorowane na popularnych programach graficznych),\n" +
+            "  \u2022 Wybór koloru powinny odbywać się zarówno za pomocą myszy, jak i poprzez wprowadzenie poszczególnych wartości w pola tekstowe,\n" +
+            "  \u2022 Wybrany kolor powinien zostać zaprezentowany oraz przekonwertowany na drugi format, tzn. na CMYK przy wyborze RGB oraz na RGB przy wyborze CMYK,\n" +
+            "  \u2022 Wartości wybrane przez użytkownika oraz po konwersji powinny zostać wyświetlone.\n\n" +
+            "b. Rysowanie kostki RGB:\n" +
+            "  \u2022 Kostka RGB powinna zostać narysowana w trójwymiarze,\n" +
+            "  \u2022 Użytkownik powinien mieć możliwość obracania kostką,\n" +
+            "  \u2022 Pokrycie kostki kolorami powinno odbywać się przy użyciu odpowiednich wzorów.";
     }
 }

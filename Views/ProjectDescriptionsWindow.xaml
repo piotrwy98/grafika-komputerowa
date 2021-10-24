@@ -23,6 +23,10 @@
             <GroupBox Header="Projekt 2">
                 <TextBlock Text="{Binding Project2Description}" TextWrapping="Wrap"/>
             </GroupBox>
+
+            <GroupBox Header="Projekt 3">
+                <TextBlock Text="{Binding Project3Description}" TextWrapping="Wrap"/>
+            </GroupBox>
         </StackPanel>
     </ScrollViewer>
 

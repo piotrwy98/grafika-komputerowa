@@ -1,11 +1,17 @@
 ﻿using GrafikaKomputerowa.Models;
 using System;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace GrafikaKomputerowa.ViewModels
 {
     public class Project3ViewModel : NotifyPropertyChanged
     {
+        #region Commands
+        public ICommand ChangeXAngleCommand { get; set; }
+        public ICommand ChangeYAngleCommand { get; set; }
+        #endregion
+
         #region Properties
         private Color _selectedColor;
         public Color SelectedColor
@@ -162,11 +168,42 @@ namespace GrafikaKomputerowa.ViewModels
                 RefreshRgb();
             }
         }
+
+        private int _angleX;
+        public int AngleX
+        {
+            get
+            {
+                return _angleX;
+            }
+            set
+            {
+                _angleX = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int _angleY;
+        public int AngleY
+        {
+            get
+            {
+                return _angleY;
+            }
+            set
+            {
+                _angleY = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         public Project3ViewModel()
         {
-            SelectedColor = Color.FromRgb(0, 0, 0);
+            ChangeXAngleCommand = new RelayCommand(ChangeXAngle);
+            ChangeYAngleCommand = new RelayCommand(ChangeYAngle);
+
+            SelectedColor = Color.FromRgb(0, 206, 209);
         }
 
         public void RefreshCmyk()
@@ -175,10 +212,10 @@ namespace GrafikaKomputerowa.ViewModels
             float newG = (float) G / 255;
             float newB = (float) B / 255;
 
-            _k = Helper(1 - Math.Max(Math.Max(newR, newG), newB));
-            _c = Helper((1 - newR - K) / (1 - K));
-            _m = Helper((1 - newG - K) / (1 - K));
-            _y = Helper((1 - newB - K) / (1 - K));
+            _k = HandleDivideByZero(1 - Math.Max(Math.Max(newR, newG), newB));
+            _c = HandleDivideByZero((1 - newR - K) / (1 - K));
+            _m = HandleDivideByZero((1 - newG - K) / (1 - K));
+            _y = HandleDivideByZero((1 - newB - K) / (1 - K));
 
             OnPropertyChanged("K");
             OnPropertyChanged("C");
@@ -202,7 +239,7 @@ namespace GrafikaKomputerowa.ViewModels
             OnPropertyChanged("SelectedColorBrush");
         }
 
-        public float Helper(float value)
+        public float HandleDivideByZero(float value)
         {
             if (value < 0 || float.IsNaN(value))
             {
@@ -210,6 +247,22 @@ namespace GrafikaKomputerowa.ViewModels
             }
 
             return value;
+        }
+
+        private void ChangeXAngle(object obj)
+        {
+            if(int.TryParse(obj.ToString(), out int angle))
+            {
+                AngleX = (AngleX + angle) % 360;
+            }
+        }
+
+        private void ChangeYAngle(object obj)
+        {
+            if (int.TryParse(obj.ToString(), out int angle))
+            {
+                AngleY = (AngleY + angle) % 360;
+            }
         }
     }
 }

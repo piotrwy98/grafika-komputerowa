@@ -3,11 +3,11 @@
 namespace GrafikaKomputerowa.Views
 {
     /// <summary>
-    /// Interaction logic for Project4View.xaml
+    /// Interaction logic for Project5View.xaml
     /// </summary>
-    public partial class Project4View : UserControl
+    public partial class Project5View : UserControl
     {
-        public Project4View()
+        public Project5View()
         {
             InitializeComponent();
         }

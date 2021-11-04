@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="GrafikaKomputerowa.Views.Project5View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:local="clr-namespace:GrafikaKomputerowa.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" RenderOptions.BitmapScalingMode="HighQuality">
+    <UserControl.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Content" Value="Zastosuj"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="IsEnabled" Value="{Binding IsImageLoaded}"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Background="LightGray">
+            <StackPanel.Resources>
+                <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
+                    <Setter Property="Margin" Value="15"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <GroupBox Header="Histogram">
+                <StackPanel>
+                    <ComboBox ItemsSource="{Binding Histograms}" SelectedIndex="{Binding SelectedHistogramIndex}" Margin="0 0 0 10"/>
+                    <Button Command="{Binding ApplyHistogramCommand}"/>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Binaryzacja">
+                <StackPanel>
+                    <ComboBox ItemsSource="{Binding Binarizations}" SelectedIndex="{Binding SelectedBinarizationIndex}"/>
+                    <Button Command="{Binding ApplyBinarizationCommand}" Margin="0 10 0 0"/>
+                </StackPanel>
+            </GroupBox>
+
+            <Button Content="Resetuj obraz" Command="{Binding ResetImageCommand}" Margin="15"/>
+        </StackPanel>
+
+        <Border Grid.Column="1" BorderBrush="LightGray" BorderThickness="0 15 12 15">
+            <Image Source="{Binding BitmapImage}" Margin="10"/>
+        </Border>
+    </Grid>
+</UserControl>

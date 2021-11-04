@@ -83,9 +83,11 @@
     <Compile Include="Models\Project2\PpmFileType.cs" />
     <Compile Include="Models\Project4\FilterType.cs" />
     <Compile Include="Models\Project4\TransformationType.cs" />
+    <Compile Include="Models\Project5\HistogramType.cs" />
     <Compile Include="ViewModels\CompressionLevelViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\Project2ViewModel.cs" />
+    <Compile Include="ViewModels\Project5ViewModel.cs" />
     <Compile Include="ViewModels\Project4ViewModel.cs" />
     <Compile Include="ViewModels\Project3ViewModel.cs" />
     <Compile Include="ViewModels\ProjectDescripionsViewModel.cs" />
@@ -103,6 +105,9 @@
     </Compile>
     <Compile Include="Views\Project4View.xaml.cs">
       <DependentUpon>Project4View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project5View.xaml.cs">
+      <DependentUpon>Project5View.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProjectDescriptionsWindow.xaml.cs">
       <DependentUpon>ProjectDescriptionsWindow.xaml</DependentUpon>
@@ -144,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Project4View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project5View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

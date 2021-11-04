@@ -14,18 +14,25 @@
                 <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
                     <Setter Property="Margin" Value="10"/>
                 </Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="TextWrapping" Value="Wrap"/>
+                </Style>
             </StackPanel.Resources>
 
             <GroupBox Header="Projekt 1">
-                <TextBlock Text="{Binding Project1Description}" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Project1Description}"/>
             </GroupBox>
 
             <GroupBox Header="Projekt 2">
-                <TextBlock Text="{Binding Project2Description}" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Project2Description}"/>
             </GroupBox>
 
             <GroupBox Header="Projekt 3">
-                <TextBlock Text="{Binding Project3Description}" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Project3Description}"/>
+            </GroupBox>
+
+            <GroupBox Header="Projekt 4">
+                <TextBlock Text="{Binding Project4Description}"/>
             </GroupBox>
         </StackPanel>
     </ScrollViewer>

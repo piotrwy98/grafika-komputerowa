@@ -22,15 +22,15 @@
         <StackPanel Grid.Column="0" Background="LightGray">
             <StackPanel.Resources>
                 <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
-                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="Margin" Value="15 5"/>
                 </Style>
             </StackPanel.Resources>
 
-            <GroupBox Header="Kolor" Margin="5 15 5 5">
+            <GroupBox Header="Kolor" Margin="15 15 15 5">
                 <mah:ColorPicker SelectedColor="{Binding SelectedColor}"/>
             </GroupBox>
             
-            <GroupBox Header="Red" Margin="5 42 5 5">
+            <GroupBox Header="Red" Margin="15 42 15 5">
                 <mah:NumericUpDown Value="{Binding R}" Minimum="0" Maximum="255"/>
             </GroupBox>
 
@@ -42,7 +42,7 @@
                 <mah:NumericUpDown Value="{Binding B}" Minimum="0" Maximum="255"/>
             </GroupBox>
 
-            <GroupBox Header="Cyan" Margin="5 42 5 5">
+            <GroupBox Header="Cyan" Margin="15 42 15 5">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>

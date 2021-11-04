@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace GrafikaKomputerowa.Converters
 {
-    public class DoubleUpValueConverter : IValueConverter
+    public class MultiplyByTwoConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

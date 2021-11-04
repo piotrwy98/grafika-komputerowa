@@ -12,7 +12,7 @@
              xmlns:local="clr-namespace:GrafikaKomputerowa.Views"
              mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="800" dialog:DialogParticipation.Register="{Binding}">
     <UserControl.Resources>
-        <converters:DoubleUpValueConverter x:Key="DoubleUpValueConverter"/>
+        <converters:MultiplyByTwoConverter x:Key="MultiplyByTwoConverter"/>
     </UserControl.Resources>
     
     <Grid>
@@ -167,7 +167,7 @@
                             <Rectangle Width="{Binding Width}" Height="{Binding Height}" StrokeThickness="{Binding StrokeThickness}" Stroke="{Binding StrokeColorBrush}" Fill="{Binding FillColorBrush}"/>
                         </DataTemplate>
                         <DataTemplate DataType="{x:Type pr1:Circle}">
-                            <Ellipse Width="{Binding Radius, Converter={StaticResource DoubleUpValueConverter}}" Height="{Binding Radius, Converter={StaticResource DoubleUpValueConverter}}" StrokeThickness="{Binding StrokeThickness}" Stroke="{Binding StrokeColorBrush}" Fill="{Binding FillColorBrush}"/>
+                            <Ellipse Width="{Binding Radius, Converter={StaticResource MultiplyByTwoConverter}}" Height="{Binding Radius, Converter={StaticResource MultiplyByTwoConverter}}" StrokeThickness="{Binding StrokeThickness}" Stroke="{Binding StrokeColorBrush}" Fill="{Binding FillColorBrush}"/>
                         </DataTemplate>
                     </ItemsControl.Resources>
                 </ItemsControl>

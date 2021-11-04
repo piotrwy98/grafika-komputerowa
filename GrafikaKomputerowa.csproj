@@ -76,14 +76,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\CompressionLevelConverter.cs" />
-    <Compile Include="Converters\MultiplyByOneHundred.cs" />
+    <Compile Include="Converters\MultiplyByOneHundredConverter.cs" />
     <Compile Include="Models\DialogCloser.cs" />
     <Compile Include="Models\Project1\MouseMoveMode.cs" />
     <Compile Include="Models\Project2\InvalidPpmFileException.cs" />
     <Compile Include="Models\Project2\PpmFileType.cs" />
+    <Compile Include="Models\Project4\FilterType.cs" />
+    <Compile Include="Models\Project4\TransformationType.cs" />
     <Compile Include="ViewModels\CompressionLevelViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\Project2ViewModel.cs" />
+    <Compile Include="ViewModels\Project4ViewModel.cs" />
     <Compile Include="ViewModels\Project3ViewModel.cs" />
     <Compile Include="ViewModels\ProjectDescripionsViewModel.cs" />
     <Compile Include="Views\CompressionLevelWindow.xaml.cs">
@@ -97,6 +100,9 @@
     </Compile>
     <Compile Include="Views\Project3View.xaml.cs">
       <DependentUpon>Project3View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project4View.xaml.cs">
+      <DependentUpon>Project4View.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProjectDescriptionsWindow.xaml.cs">
       <DependentUpon>ProjectDescriptionsWindow.xaml</DependentUpon>
@@ -113,7 +119,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Converters\DoubleUpValueConverter.cs" />
+    <Compile Include="Converters\MultiplyByTwoConverter.cs" />
     <Compile Include="Models\Project1\Circle.cs" />
     <Compile Include="Models\Project1\Figure.cs" />
     <Compile Include="Models\Project1\Line.cs" />
@@ -134,6 +140,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Project3View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project4View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:vm="clr-namespace:GrafikaKomputerowa.ViewModels"
         xmlns:dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:GrafikaKomputerowa.Views"
@@ -56,6 +55,10 @@
 
             <TabItem Header="Projekt 3" Style="{x:Null}">
                 <local:Project3View DataContext="{Binding Project3VM}"/>
+            </TabItem>
+
+            <TabItem Header="Projekt 4" Style="{x:Null}">
+                <local:Project4View DataContext="{Binding Project4VM}"/>
             </TabItem>
         </TabControl>
 

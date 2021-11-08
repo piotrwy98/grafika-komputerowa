@@ -83,6 +83,7 @@
     <Compile Include="Models\Project2\PpmFileType.cs" />
     <Compile Include="Models\Project4\FilterType.cs" />
     <Compile Include="Models\Project4\TransformationType.cs" />
+    <Compile Include="Models\Project5\BinarizationType.cs" />
     <Compile Include="Models\Project5\HistogramType.cs" />
     <Compile Include="ViewModels\CompressionLevelViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

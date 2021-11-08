@@ -43,5 +43,13 @@
             "  • Filtr wykrywania krawędzi (sobel),\n" +
             "  • Filtr górnoprzepustowy wyostrzający,\n" +
             "  • Filtr rozmycie gaussowskie.";
+
+        public string Project5Description { get; } = "a. Histogram:\n" +
+            "  • Rozszerzenie histogramu,\n" +
+            "  • Wyrównanie (ang. equalization) histogramu.\n\n" +
+            "b. Binaryzacja:\n" +
+            "  • Ręcznie przez użytkownika - użytkownik podaje próg bezpośrednio,\n" +
+            "  • Procentowa selekcja czarnego (ang. Percent Black Selection),\n" +
+            "  • Selekcja entropii (ang. Entropy Selection).";
     }
 }

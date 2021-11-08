@@ -34,7 +34,10 @@
             <GroupBox Header="Projekt 4">
                 <TextBlock Text="{Binding Project4Description}"/>
             </GroupBox>
+
+            <GroupBox Header="Projekt 5">
+                <TextBlock Text="{Binding Project5Description}"/>
+            </GroupBox>
         </StackPanel>
     </ScrollViewer>
-
 </mah:MetroWindow>

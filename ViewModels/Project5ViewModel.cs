@@ -1,8 +1,7 @@
 ﻿using GrafikaKomputerowa.Models;
-using GrafikaKomputerowa.Models.Project4;
 using GrafikaKomputerowa.Models.Project5;
 using Microsoft.Win32;
-using System.Collections.Generic;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -38,7 +37,7 @@ namespace GrafikaKomputerowa.ViewModels
 
         public string[] Histograms { get; } = new string[] { "Rozszerzenie", "Wyrównanie" };
 
-        public string[] Binarizations { get; } = new string[] { "Wygładzający (uśredniający)", "Medianowy", "Wykrywania krawędzi (sobel)", "Górnoprzepustowy wyostrzający", "Rozmycie gaussowskie" };
+        public string[] Binarizations { get; } = new string[] { "Ręczny próg", "Procentowa selekcja czarnego", "Selekcja entropii" };
 
         private int _selectedHistogramIndex;
         public int SelectedHistogramIndex
@@ -51,9 +50,6 @@ namespace GrafikaKomputerowa.ViewModels
             {
                 _selectedHistogramIndex = value;
                 OnPropertyChanged();
-
-                IsBinarizationValueVisible = value != (int) TransformationType.GRAYSCALE_V1 &&
-                                               value != (int) TransformationType.GRAYSCALE_V2;
             }
         }
 
@@ -68,11 +64,13 @@ namespace GrafikaKomputerowa.ViewModels
             {
                 _selectedBinarizationIndex = value;
                 OnPropertyChanged();
+
+                IsBinarizationValueVisible = value < 2;
             }
         }
 
-        private int _binarizationValue;
-        public int BinarizationValue
+        private byte _binarizationValue;
+        public byte BinarizationValue
         {
             get
             {
@@ -183,6 +181,109 @@ namespace GrafikaKomputerowa.ViewModels
 
         private void ApplyBinarization(object obj)
         {
+            switch((BinarizationType) _selectedBinarizationIndex)
+            {
+                case BinarizationType.MANUAL_SELECTION:
+                    for (int x = 0; x < _currentBitmap.Width; x++)
+                    {
+                        for (int y = 0; y < _currentBitmap.Height; y++)
+                        {
+                            var pixelColor = _currentBitmap.GetPixel(x, y);
+                            double grayScale = (pixelColor.R + pixelColor.G + pixelColor.B) / 3.0;
+                            var newPixelColor = grayScale < _binarizationValue ? Color.Black : Color.White;
+                            _currentBitmap.SetPixel(x, y, newPixelColor);
+                        }
+                    }
+                    break;
+
+                case BinarizationType.PERCENT_BLACK_SELECTION:
+                    if(_binarizationValue > 100)
+                    {
+                        BinarizationValue = 100;
+                    }
+
+                    var bitmap = new Bitmap(_currentBitmap.Width, _currentBitmap.Height);
+                    var grayHistogram = new int[256];
+
+                    for (int x = 0; x < _currentBitmap.Width; x++)
+                    {
+                        for (int y = 0; y < _currentBitmap.Height; y++)
+                        {
+                            var pixelColor = _currentBitmap.GetPixel(x, y);
+                            byte grayScale = (byte)((pixelColor.R + pixelColor.G + pixelColor.B) / 3.0);
+                            bitmap.SetPixel(x, y, Color.FromArgb(grayScale, grayScale, grayScale));
+                            grayHistogram[grayScale]++;
+                        }
+                    }
+
+                    double maxBlackPixels = _binarizationValue * 0.01 * _currentBitmap.Width * _currentBitmap.Height;
+                    double blackPixelsSum = 0;
+                    byte treshold = 0;
+
+                    for(int i = 0; i < grayHistogram.Length; i++)
+                    {
+                        treshold = (byte) i;
+                        blackPixelsSum += grayHistogram[i];
+
+                        if(blackPixelsSum >= maxBlackPixels)
+                        {
+                            break;
+                        }
+                    }
+
+                    for (int x = 0; x < _currentBitmap.Width; x++)
+                    {
+                        for (int y = 0; y < _currentBitmap.Height; y++)
+                        {
+                            var pixelColor = bitmap.GetPixel(x, y);
+                            var newPixelColor = pixelColor.R < treshold ? Color.Black : Color.White;
+                            _currentBitmap.SetPixel(x, y, newPixelColor);
+                        }
+                    }
+                    break;
+
+                case BinarizationType.ENTROPY_SELECTION:
+                    bitmap = new Bitmap(_currentBitmap.Width, _currentBitmap.Height);
+                    grayHistogram = new int[256];
+
+                    for (int x = 0; x < _currentBitmap.Width; x++)
+                    {
+                        for (int y = 0; y < _currentBitmap.Height; y++)
+                        {
+                            var pixelColor = _currentBitmap.GetPixel(x, y);
+                            byte grayScale = (byte)((pixelColor.R + pixelColor.G + pixelColor.B) / 3.0);
+                            bitmap.SetPixel(x, y, Color.FromArgb(grayScale, grayScale, grayScale));
+                            grayHistogram[grayScale]++;
+                        }
+                    }
+
+                    double entropyTreshold = 0;
+                    double pixelCount = _currentBitmap.Width * _currentBitmap.Height;
+
+                    for (int i = 0; i < grayHistogram.Length; i++)
+                    {
+                        double probability = grayHistogram[i] / pixelCount;
+
+                        if(probability != 0)
+                        {
+                            entropyTreshold += probability * Math.Log(probability);
+                        }
+                    }
+
+                    entropyTreshold = -entropyTreshold;
+
+                    for (int x = 0; x < _currentBitmap.Width; x++)
+                    {
+                        for (int y = 0; y < _currentBitmap.Height; y++)
+                        {
+                            var pixelColor = bitmap.GetPixel(x, y);
+                            var newPixelColor = pixelColor.R < entropyTreshold ? Color.Black : Color.White;
+                            _currentBitmap.SetPixel(x, y, newPixelColor);
+                        }
+                    }
+                    break;
+            }
+
             LoadCurrentBitmap();
         }
 

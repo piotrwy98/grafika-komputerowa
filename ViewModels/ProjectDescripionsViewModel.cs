@@ -51,5 +51,11 @@
             "  • Ręcznie przez użytkownika - użytkownik podaje próg bezpośrednio,\n" +
             "  • Procentowa selekcja czarnego (ang. Percent Black Selection),\n" +
             "  • Selekcja entropii (ang. Entropy Selection).";
+
+        public string Project6Description { get; } = "  • Rysowanie krzywej Béziera,\n" +
+            "  • Program może rysować krzywą Béziera o dowolnym stopniu,\n" +
+            "  • Stopień rysowanej krzywej powinien zostać podany przez użytkownika,\n" +
+            "  • Punkty charakterystyczne krzywej Béziera można podać przy pomocy pól tekstowych,\n" +
+            "  • Punkty charakterystyczne krzywej Béziera można modyfikować przy pomocy pól tekstowych.";
     }
 }

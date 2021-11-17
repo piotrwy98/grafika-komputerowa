@@ -23,6 +23,7 @@ namespace GrafikaKomputerowa.ViewModels
         public Project3ViewModel Project3VM { get; set; }
         public Project4ViewModel Project4VM { get; set; }
         public Project5ViewModel Project5VM { get; set; }
+        public Project6ViewModel Project6VM { get; set; }
         #endregion
 
         public MainViewModel(IDialogCoordinator dialogCoordinator)
@@ -40,6 +41,7 @@ namespace GrafikaKomputerowa.ViewModels
             Project3VM = new Project3ViewModel();
             Project4VM = new Project4ViewModel();
             Project5VM = new Project5ViewModel();
+            Project6VM = new Project6ViewModel();
         }
 
         private void NewFile(object obj)

@@ -98,6 +98,10 @@
     <Compile Include="Models\Project5\BinarizationType.cs" />
     <Compile Include="Models\Project5\HistogramType.cs" />
     <Compile Include="Models\Project6\Point.cs" />
+    <Compile Include="Models\Project7\CanvasElement.cs" />
+    <Compile Include="Models\Project7\Circle.cs" />
+    <Compile Include="Models\Project7\Polygon.cs" />
+    <Compile Include="ViewModels\AddEditPolygonViewModel.cs" />
     <Compile Include="ViewModels\CompressionLevelViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\Project2ViewModel.cs" />
@@ -105,7 +109,11 @@
     <Compile Include="ViewModels\Project4ViewModel.cs" />
     <Compile Include="ViewModels\Project3ViewModel.cs" />
     <Compile Include="ViewModels\Project6ViewModel.cs" />
+    <Compile Include="ViewModels\Project7ViewModel.cs" />
     <Compile Include="ViewModels\ProjectDescripionsViewModel.cs" />
+    <Compile Include="Views\AddEditPolygonWindow.xaml.cs">
+      <DependentUpon>AddEditPolygonWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CompressionLevelWindow.xaml.cs">
       <DependentUpon>CompressionLevelWindow.xaml</DependentUpon>
     </Compile>
@@ -127,9 +135,16 @@
     <Compile Include="Views\Project6View.xaml.cs">
       <DependentUpon>Project6View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Project7View.xaml.cs">
+      <DependentUpon>Project7View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProjectDescriptionsWindow.xaml.cs">
       <DependentUpon>ProjectDescriptionsWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\AddEditPolygonWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CompressionLevelWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -175,6 +190,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Project6View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project7View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

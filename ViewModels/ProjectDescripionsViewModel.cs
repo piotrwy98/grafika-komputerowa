@@ -52,10 +52,22 @@
             "  • Procentowa selekcja czarnego (ang. Percent Black Selection),\n" +
             "  • Selekcja entropii (ang. Entropy Selection).";
 
-        public string Project6Description { get; } = "  • Rysowanie krzywej Béziera,\n" +
-            "  • Program może rysować krzywą Béziera o dowolnym stopniu,\n" +
-            "  • Stopień rysowanej krzywej powinien zostać podany przez użytkownika,\n" +
-            "  • Punkty charakterystyczne krzywej Béziera można podać przy pomocy pól tekstowych,\n" +
-            "  • Punkty charakterystyczne krzywej Béziera można modyfikować przy pomocy pól tekstowych.";
+        public string Project6Description { get; } = "• Rysowanie krzywej Béziera,\n" +
+            "• Program może rysować krzywą Béziera o dowolnym stopniu,\n" +
+            "• Stopień rysowanej krzywej powinien zostać podany przez użytkownika,\n" +
+            "• Punkty charakterystyczne krzywej Béziera można podać przy pomocy pól tekstowych,\n" +
+            "• Punkty charakterystyczne krzywej Béziera można modyfikować przy pomocy pól tekstowych.";
+
+        public string Project7Description { get; } = "• Definiowanie i rysowanie dowolnych figur - wielokątów przy użyciu myszy lub pól tekstowych,\n" +
+            "• Wykonywanie następujących przekształceń na stworzonych figurach:\n" +
+            "  1. Przesunięcie o zadany wektor,\n" +
+            "  2. Obrót względem zadanego punktu o zadany kąt,\n" +
+            "  3. Skalowanie względem zadanego punktu o zadany współczynnik,\n" +
+            "• Figury powinny być chwytane przy użyciu myszy,\n" +
+            "• Wszystkie operacje powinny móc być wykonywane zarówno przy pomocy myszy, jak i za pomocą pól tekstowych:\n" +
+            "  1. Przesunięcie - przy użyciu myszy oraz po podaniu wektora i zatwierdzeniu,\n" +
+            "  2. Obrót - definiowanie punktu obrotu przy użyciu myszy oraz za pomocą pól tekstowych, wykonywanie obrotu przy użyciu myszy (chywanie i obracanie) oraz poprzez podanie i zatwierdzenie kąta obrotu w polu tekstowym,\n" +
+            "  3. Skalowanie - definiowanie punktu skalowania przy użyciu myszy oraz za pomocą pól tekstowych, wykonywanie skalowania przy użyciu myszy (chwytanie i skalowanie) oraz poprzez podanie i zatwierdzenie współczynnika skalowania w polu tekstowym,\n" +
+            "• Możliwość serializacji i deserializacji (zapisywanie i wczytywanie), tak aby za każdym uruchomieniem programu nie było konieczności rysowania figur od nowa.";
     }
 }

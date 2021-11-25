@@ -68,6 +68,10 @@
             <TabItem Header="Projekt 6" Style="{x:Null}">
                 <local:Project6View DataContext="{Binding Project6VM}"/>
             </TabItem>
+
+            <TabItem Header="Projekt 7" Style="{x:Null}">
+                <local:Project7View DataContext="{Binding Project7VM}"/>
+            </TabItem>
         </TabControl>
 
         <StatusBar Grid.Row="2">

@@ -1,0 +1,81 @@
+﻿<mah:MetroWindow x:Class="GrafikaKomputerowa.Views.AddEditPolygonWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+        xmlns:xc="clr-namespace:ExCastle.Wpf"
+        xmlns:local="clr-namespace:GrafikaKomputerowa.Views"
+        xmlns:converters="clr-namespace:GrafikaKomputerowa.Converters"
+        mc:Ignorable="d"
+        Title="{Binding WindowTitle}" TitleCharacterCasing="Normal" Height="560" MinHeight="340" Width="355" MinWidth="355"
+        WindowStartupLocation="CenterScreen" dialog:DialogParticipation.Register="{Binding}" xc:DialogCloser.DialogResult="{Binding DialogResult}">
+    <mah:MetroWindow.Resources>
+        <converters:AddOneConverter x:Key="AddOneConverter"/>
+    </mah:MetroWindow.Resources>
+    
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        
+        <GroupBox Grid.Row="0" Header="Kolor" Margin="0 0 0 15">
+            <mah:ColorPicker SelectedColor="{Binding FillColor}"/>
+        </GroupBox>
+
+        <ScrollViewer Name="Points_SV" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding Points}" AlternationCount="1000">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <GroupBox Margin="0 0 0 15">
+                            <GroupBox.Header>
+                                <Grid>
+                                    <TextBlock Text="{Binding Path=(ItemsControl.AlternationIndex), RelativeSource={RelativeSource TemplatedParent}, StringFormat=PUNKT {0}, Converter={StaticResource AddOneConverter}}" Foreground="White" VerticalAlignment="Center"/>
+                                    <fa:ImageAwesome Icon="Remove" Foreground="DarkRed" Height="16" ToolTip="Usuń punkt" Cursor="Hand" HorizontalAlignment="Right">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                <i:InvokeCommandAction Command="{Binding DataContext.RemovePointCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </fa:ImageAwesome>
+                                </Grid>
+                            </GroupBox.Header>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="X =" Margin="2 0 5 10" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <mah:NumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding X}" Margin="0 0 0 10"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Y =" Margin="2 0 5 0" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <mah:NumericUpDown Grid.Row="1" Grid.Column="1" Value="{Binding Y}"/>
+                            </Grid>
+                        </GroupBox>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <Button Grid.Row="2" Background="ForestGreen" ToolTip="Dodaj punkt" Command="{Binding AddPointCommand}" Margin="0 10" Click="AddPoint_BT_Click">
+            <fa:ImageAwesome Icon="Plus" Height="20" Foreground="White"/>
+        </Button>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Zapisz" Command="{Binding SaveCommand}" Height="40" Width="75" Margin="10 0"/>
+            <Button Content="Anuluj" Command="{Binding CancelCommand}" Height="40" Width="75" Margin="10 0"/>
+        </StackPanel>
+    </Grid>
+</mah:MetroWindow>

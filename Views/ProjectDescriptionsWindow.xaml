@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:GrafikaKomputerowa.ViewModels"
         xmlns:local="clr-namespace:GrafikaKomputerowa.Views"
         mc:Ignorable="d"
-        Title="Opisy projektów" TitleCharacterCasing="Normal" MinHeight="200" Height="350" MinWidth="200" Width="600" WindowStartupLocation="CenterScreen">
+        Title="Opisy projektów" TitleCharacterCasing="Normal" MinHeight="200" Height="360" MinWidth="200" Width="600" WindowStartupLocation="CenterScreen">
     <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0 5">
         <StackPanel>
             <StackPanel.Resources>
@@ -41,6 +41,10 @@
 
             <GroupBox Header="Projekt 6">
                 <TextBlock Text="{Binding Project6Description}"/>
+            </GroupBox>
+
+            <GroupBox Header="Projekt 7">
+                <TextBlock Text="{Binding Project7Description}"/>
             </GroupBox>
         </StackPanel>
     </ScrollViewer>

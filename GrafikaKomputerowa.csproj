@@ -101,10 +101,12 @@
     <Compile Include="Models\Project7\CanvasElement.cs" />
     <Compile Include="Models\Project7\Circle.cs" />
     <Compile Include="Models\Project7\Polygon.cs" />
+    <Compile Include="Models\Project8\MorphologyType.cs" />
     <Compile Include="ViewModels\AddEditPolygonViewModel.cs" />
     <Compile Include="ViewModels\CompressionLevelViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\Project2ViewModel.cs" />
+    <Compile Include="ViewModels\Project8ViewModel.cs" />
     <Compile Include="ViewModels\Project5ViewModel.cs" />
     <Compile Include="ViewModels\Project4ViewModel.cs" />
     <Compile Include="ViewModels\Project3ViewModel.cs" />
@@ -128,6 +130,9 @@
     </Compile>
     <Compile Include="Views\Project4View.xaml.cs">
       <DependentUpon>Project4View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Project8View.xaml.cs">
+      <DependentUpon>Project8View.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Project5View.xaml.cs">
       <DependentUpon>Project5View.xaml</DependentUpon>
@@ -184,6 +189,10 @@
     <Page Include="Views\Project4View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Project8View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Project5View.xaml">
       <SubType>Designer</SubType>

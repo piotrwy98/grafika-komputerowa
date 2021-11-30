@@ -69,5 +69,13 @@
             "  2. Obrót - definiowanie punktu obrotu przy użyciu myszy oraz za pomocą pól tekstowych, wykonywanie obrotu przy użyciu myszy (chywanie i obracanie) oraz poprzez podanie i zatwierdzenie kąta obrotu w polu tekstowym,\n" +
             "  3. Skalowanie - definiowanie punktu skalowania przy użyciu myszy oraz za pomocą pól tekstowych, wykonywanie skalowania przy użyciu myszy (chwytanie i skalowanie) oraz poprzez podanie i zatwierdzenie współczynnika skalowania w polu tekstowym,\n" +
             "• Możliwość serializacji i deserializacji (zapisywanie i wczytywanie), tak aby za każdym uruchomieniem programu nie było konieczności rysowania figur od nowa.";
+
+        public string Project8Description { get; } = "• Wczytanie obrazu,\n" +
+            "• Implementacja następujących filtrów morfologicznych oraz zaprezentowanie ich działania na wczytanym obrazie:\n" +
+            "  1. Dylatacja,\n" +
+            "  2. Erozja,\n" +
+            "  3. Otwarcie,\n" +
+            "  4. Domknięcie,\n" +
+            "  5. Hit-or-miss (pocienianie i pogrubianie).";
     }
 }

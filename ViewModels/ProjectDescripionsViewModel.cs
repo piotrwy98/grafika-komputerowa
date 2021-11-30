@@ -77,5 +77,10 @@
             "  3. Otwarcie,\n" +
             "  4. Domknięcie,\n" +
             "  5. Hit-or-miss (pocienianie i pogrubianie).";
+
+        public string Project9Description { get; } = "• Wczytanie obrazu,\n" +
+            "• Obliczenie, ile procent wczytanego obrazu stanowi zieleń,\n" +
+            "• Wyniki obliczeń powinny być możliwie dokładne,\n" +
+            "• Wykorzystana metoda obliczeń jest w pełni dowolna.";
     }
 }

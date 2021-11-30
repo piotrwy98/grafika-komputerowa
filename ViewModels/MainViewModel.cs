@@ -26,6 +26,7 @@ namespace GrafikaKomputerowa.ViewModels
         public Project6ViewModel Project6VM { get; set; }
         public Project7ViewModel Project7VM { get; set; }
         public Project8ViewModel Project8VM { get; set; }
+        public Project9ViewModel Project9VM { get; set; }
         #endregion
 
         public MainViewModel(IDialogCoordinator dialogCoordinator)
@@ -46,6 +47,7 @@ namespace GrafikaKomputerowa.ViewModels
             Project6VM = new Project6ViewModel();
             Project7VM = new Project7ViewModel();
             Project8VM = new Project8ViewModel();
+            Project9VM = new Project9ViewModel();
         }
 
         private void NewFile(object obj)
@@ -85,6 +87,10 @@ namespace GrafikaKomputerowa.ViewModels
                 case 7:
                     Project8VM.OpenFile();
                     break;
+
+                case 8:
+                    Project9VM.OpenFile();
+                    break;
             }
         }
 
@@ -115,18 +121,18 @@ namespace GrafikaKomputerowa.ViewModels
         private void WindowKeyDown(object obj)
         {
             var args = obj as KeyEventArgs;
-            if (args == null)
-                return;
-
-            switch (TabControlSelectedIndex)
+            if (args != null)
             {
-                case 0:
-                    Project1VM.KeyDown(args);
-                    break;
+                switch (TabControlSelectedIndex)
+                {
+                    case 0:
+                        Project1VM.KeyDown(args);
+                        break;
 
-                case 6:
-                    Project7VM.KeyDown(args);
-                    break;
+                    case 6:
+                        Project7VM.KeyDown(args);
+                        break;
+                }
             }
         }
     }
